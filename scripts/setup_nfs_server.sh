@@ -1,28 +1,20 @@
 #!/bin/bash
 set -ex
 
-#importamos variables de entorno
 source .env
 
-#Actualizamo paquetes 
 apt update
-
 apt upgrade -y
 
-#Instalamos el servidor NFS
-apt install nfs-kernel-server -y
+apt install nfs-common -y
 
-#Creamos el directorio que vamos a compartir
 mkdir -p /var/www/html
 
-#Asignamos permisos al directorio del directorio /var/www/html
-chown nobody:nogroup /var/www/html
+# Prueba de montaje
+mount $NFS_SERVER_IP:/var/www/html /var/www/html
 
-#Copiamos nuestra plantilla del archivo exports ´
-cp ../nfs/exports /etc
+# Copiamos la plantilla directamente al fstab (así lo hace José Juan)
+cp ../nfs/fstab-entry /etc/fstab
 
-#Actualizamos el archivo exports con las IPs de los servidores frontend
-sed -i "s|PUT_YOUR_FRONTEND_NETWORK|$FRONTEND_NETWORK|" /etc/exports
-
-#Reinciiamos 1l servicio NFS para aplicar los cambios
-systemctl restart nfs-kernel-server
+# Sustituimos la IP en el archivo final
+sed -i "s|PUT_NFS_SERVER_IP|$NFS_SERVER_IP|" /etc/fstab

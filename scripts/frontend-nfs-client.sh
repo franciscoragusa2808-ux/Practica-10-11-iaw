@@ -8,8 +8,14 @@ apt upgrade -y
 
 apt install nfs-common -y
 
+# Crear el punto de montaje
 mkdir -p /var/www/html
 
+# Montaje inicial
 mount $NFS_SERVER_IP:/var/www/html /var/www/html
 
-echo "$NFS_SERVER_IP:/var/www/html /var/www/html nfs defaults 0 0" >> /etc/fstab
+# Copiamos la plantilla al fstab
+cp ../nfs/fstab-entry /etc/fstab
+
+# Sustituimos la IP en el archivo final
+sed -i "s|PUT_NFS_SERVER_IP|$NFS_SERVER_IP|" /etc/fstab
