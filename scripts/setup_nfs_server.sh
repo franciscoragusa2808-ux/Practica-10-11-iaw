@@ -3,18 +3,23 @@ set -ex
 
 source .env
 
+# Actualizar sistema
 apt update
 apt upgrade -y
 
-apt install nfs-common -y
+# Instalar NFS server
+apt install nfs-kernel-server -y
 
+# Crear directorio compartido
 mkdir -p /var/www/html
+chown nobody:nogroup /var/www/html
 
-# Prueba de montaje
-mount $NFS_SERVER_IP:/var/www/html /var/www/html
+# Configurar /etc/exports
+echo "/var/www/html ${FRONTEND_NETWORK}(rw,sync,no_subtree_check,no_root_squash)" > /etc/exports
 
-# Copiamos la plantilla directamente al fstab (así lo hace José Juan)
-cp ../nfs/fstab-entry /etc/fstab
+# Aplicar exportación
+exportfs -ra
 
-# Sustituimos la IP en el archivo final
-sed -i "s|PUT_NFS_SERVER_IP|$NFS_SERVER_IP|" /etc/fstab
+# Reiniciar servicios NFS
+systemctl restart nfs-server
+systemctl enable nfs-server
