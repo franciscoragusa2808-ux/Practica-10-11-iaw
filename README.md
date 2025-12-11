@@ -108,6 +108,7 @@ Lo que hace el script es lo siguiente:
 7) Ajusta los permisos del directorio /var/www/html asignando el propietario al usuario www-data.
 
 Comprobación de que funciona el script:
+![si](imagenes/image.png)
 
 **Script frontend-nfs-client.sh**
 
@@ -128,7 +129,7 @@ Lo que hace el script es lo siguiente:
 6) Sustituyela cadena  PUT_NFS_SERVER_IP por la IP real del servidor NFS
 
 Comprobación de funcionamiento del script:
-
+![si](imagenes/nfs-client.png)
 
 **Script deploy_frontend.sh**
 Este script se encarga de instalar Wordpress de forma automatica mediante WP-CLI. Se recomienda desplegar en uno solo front-end
@@ -164,7 +165,7 @@ Lo que hace el script es lo siguiente:
 14) Ajusta los permisos finales del directorio para Apache
 
 Comprobación de funcionamiento del script
-
+![si](imagenes/deploy-frontend.png)
 
 **install_lamp_backend.sh**
 
@@ -183,6 +184,7 @@ Lo que hace es lo siguiente:
 5) Reinicia el servicio de MySQL para aplicar los cambios.
 
 Comprobación de funcionamiento del script:
+![si](imagenes/install_backend.png)
 
 
 **Script deploy_backend.sh**
@@ -206,6 +208,7 @@ Lo que hace el script es lo siguiente:
 
 Comprobación de funcionamiento del script:
 
+![si](imagenes/deploy_backend.png)
 **Script setup_nfs_server.sh**
 
 Este script configura la máquina que actuará como servidor NFS.
@@ -245,7 +248,7 @@ Lo que hace el script es lo siguiente:
 7) Reinicia el servicio de Nginx para aplicar los cambios.
 
 Comprobación de funcionamiento del script:
-
+![si](imagenes/load.png)
 
 **Script setup_letscrypt.sh**
 
@@ -264,7 +267,7 @@ Lo que hace el script es lo siguiente:
 6) Ejecuta Certbot para obtener el certificado SSL y configurarlo automáticamente en Nginx.
 
 Comprobación de funcionamiento del script:
-
+![si](imagenes/cerbot.pngpng)
 
 # Dominio 
 En esta práctica se utiliza un dominio gratuito de No-IP definido en el archivo .env dentro de la variable CERBOT_DOMAIN. Este dominio es el que se emplea para acceder al sitio WordPress una vez completado el despliegue.
@@ -284,3 +287,6 @@ El orden de ejecución de lo sscripts es el siguiente:
 5. Ejecutamos  deploy_frontend.sh en uno de los frontales para instalar WordPress.
 
 Comprobación final:
+![se sube](imagenes/final.png)
+![se sube](imagenes/final2.png)
+
