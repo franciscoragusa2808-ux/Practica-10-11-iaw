@@ -62,3 +62,6 @@ cp ../htaccess/.htaccess /var/www/html/
 
 #Moficiamos el propietario y el grupo de /var/www/html a www-data
 chown -R www-data:www-data /var/www/html
+
+#Añadimos esta cadena $_SERVER['HTTPS'] = 'on'; al archivo wp-config.php para forzar https con sed y lo añadimos debajo de define( 'DB_COLLATE', '' );
+sed -i "/define( 'DB_COLLATE', '' );/a \ \n\$_SERVER['HTTPS'] = 'on';" /var/www/html/wp-config.php
