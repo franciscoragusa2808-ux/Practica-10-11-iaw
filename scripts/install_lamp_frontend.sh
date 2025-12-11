@@ -18,7 +18,7 @@ a2enmod rewrite
 #Reiniciamos el servicio de apache
 systemctl restart apache2
 
-Copiamos el archivo de configuración de apache
+#Copiamos el archivo de configuración de apache
 #cp ../conf/000-default.conf /etc/apache2/sites-available
 
 #Instalamos PHP y el módulo de apache para PHP y el módulo de MySQL para PHP
